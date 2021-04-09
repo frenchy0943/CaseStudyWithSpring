@@ -10,7 +10,7 @@ public interface UserGameRepository extends JpaRepository<UserGame, String>{
 
 	UserGame getUserGameByUserNameAndGameName(String userName, String gameName);
 	
-	void deleteUserGameByUserNameAndGameName(String userName, String gameName);
+	int deleteUserGameByUserNameAndGameName(String userName, String gameName);
 	
 	List<UserGame> findAllByUserName(String userName);
 	

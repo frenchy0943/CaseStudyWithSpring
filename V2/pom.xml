@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.VideoGameTracker</groupId>
-	<artifactId>V2</artifactId>
+	<artifactId>VideoGameTracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>V2</name>
+	<name>VideoGameTracker</name>
 	<description>Spring boot implentation of existing spring data JPA project</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -47,6 +47,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+   			<groupId>com.h2database</groupId>
+    		<artifactId>h2</artifactId>
+    		<scope>test</scope>
 		</dependency>
 		<!--
 		<dependency>

@@ -137,7 +137,7 @@ public class UserGame {
 }
 
 class UserGameId implements Serializable{
-	private static final long serialVersionUid = -1L;
+	private static final long serialVersionUID = -1L;
 	@Id
 	private String userName;
 	@Id

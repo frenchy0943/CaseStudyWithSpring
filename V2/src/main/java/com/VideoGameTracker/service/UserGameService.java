@@ -22,20 +22,14 @@ public class UserGameService {
 	@Autowired
 	UserService us;
 
-	public void deleteUserGame(UserGame ug) {
-		ugr.delete(ug);
-	}
-
-	public void addUserGame(UserGame ug) {
-		ugr.save(ug);
-	}
 
 	public UserGame getUserGame(String userName, String gameName) {
 		return ugr.getUserGameByUserNameAndGameName(userName, gameName);
 	}
 
-	public void linkUserAndGame(String userName, String gameName, double hours, int timesCompleted, String list) {
+	public int linkUserAndGame(String userName, String gameName, double hours, int timesCompleted, String list) {
 		Game game = null;
+		int result = 0;
 		if (!ugr.existsByUserNameAndGameName(userName, gameName)) {
 			if (!gs.exists(gameName)) {
 				game = new Game(gameName);
@@ -46,10 +40,12 @@ public class UserGameService {
 			us.addToList(userName, game, list);
 			UserGame ug = new UserGame(userName, gameName, hours, timesCompleted, list);
 			ugr.save(ug);
+			result = 1;;
 		}
+		return result;
 	}
 
-	public void updateUserGame(String userName, String gameName, double hours, int timesCompleted, String list) {
+	public UserGame updateUserGame(String userName, String gameName, double hours, int timesCompleted, String list) {
 		UserGame ug = getUserGame(userName, gameName);
 		ug.setGameHours(hours);
 		ug.setTimesCompleted(timesCompleted);
@@ -57,13 +53,15 @@ public class UserGameService {
 		us.addToList(userName, gs.getGame(gameName), list);
 		ug.setCurrentList(list);
 		ugr.save(ug);
+		return ug;
 	}
 
 	@Transactional
-	public void removeGame(String userName, String gameName) {
+	public int removeGame(String userName, String gameName) {
 		UserGame ug = getUserGame(userName, gameName);
-		ugr.deleteUserGameByUserNameAndGameName(userName, gameName);
+		int result = ugr.deleteUserGameByUserNameAndGameName(userName, gameName);
 		us.removeFromList(userName, gs.getGame(gameName), ug.getCurrentList());
+		return result;
 	}
 
 	public List<UserGame> getAllUserGamesById(String userName) {
