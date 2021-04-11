@@ -44,5 +44,45 @@ New repo with same project as bootcampCaseStudy, except this project has been in
 
 
 ## Technical Challenges
+#### Entity Relationshiips
+- Deciding how many entitites I needed to create
+- How to create them in tandem with each other, and when that would be necessary
+- Getting my join tables to work together correctly with the correct key contraints
+
+#### Spring
+- First time ever using or seeing spring
+- Learning how to query tables correctly with Spring Data JPA.
+- Spring boot conversion/for JUnit
+
+#### Front End
+- Not my strong suit
+- Getting it to look somewhat decent
+- Making checks on the front end so users can't insert the wrong kind of data
+- Creating a well thought out intuitive design
+- Form resubmission
+
+#### Back End Logic
+- Ran into some issues with deleting entities from the database as well as changing certain lists an entity might be on
+- Deciding what methods/functions I needed and didn't need
 
 ## How I tackled the challenges
+#### Entity Relationships
+- A little trial and error with a couple different entity layouts.
+- Knowing that certain objects will only be created at certain times
+- Trial and error with OneToMany and ManyToMany realationships to create the correct key contraints on the join Table
+
+#### Spring
+- Using what I learned in class in conjunction with the knowledge of other students who have used spring before as well as looking up and reading about ways to make Spring function better
+- Writing custom method queries came with time and doing it a few times. Learning the keywords that need to be used was critical here
+- Once I got the main functionality I needed Spring Boot to make JUnit testing easier. Having never done Spring boot I leaned on knowledge of other classmates to help me set up my project correctly
+
+#### Front End
+- I used a design I like that I had used for an earlier project and carried that over to this to reduce the burden of designing something new
+- Learning key words that can be used in input tags so the user can't insert bad data
+- Wireframes helped to make designing the basic layouts of each page much easier
+- When returning a MAV in the view form resubmission would create duplicate data in certain places in the database. To fix this I started returning redirects after submitting a for as to reset the hidden URL submission
+
+#### Back End Logic
+- My change list function had some weird side effects where entire lists would get deleted. To fix this I made each of the lists that a user hold its own spereate JoinTable
+- This brought on another issue when using OneToMany where the game entity would be a unique key in the JoinTables. This meant multiple users could not put the same game on the same list. Changing the entity relationship to OneToMany fixed this, and gave voth users and games a foreign key contrainst
+- UserGame objects/entitites are only created when a user adds a game to the database. But in the initial creation of that method I forgot to add the game to a list in the User entity. I had to go back and make changes to a few methods to make sure that all the necessary changes to both the User entity and the UserGame entity were being made whenever necessary. 
