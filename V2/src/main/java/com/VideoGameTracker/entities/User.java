@@ -3,6 +3,7 @@ package com.VideoGameTracker.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +12,18 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
+/**
+ * User Entity
+ * @author Brandon French
+ *
+ */
 @Entity
 public class User {
 
 	@Id
 	private String userName;
 	
+	@Basic(optional = false)
 	private String password;
 	
 	@Transient

@@ -18,6 +18,11 @@ import com.VideoGameTracker.service.GameService;
 import com.VideoGameTracker.service.UserGameService;
 import com.VideoGameTracker.service.UserService;
 
+/**
+ * Controller class for the application
+ * @author Brandon French
+ *
+ */
 @Controller
 public class MainController {
 
@@ -46,7 +51,11 @@ public class MainController {
 	public String loginHandler() {
 		return "login";
 	}
-
+	
+	/**
+	 * Create bean with all UserGames for a user, add it to ModelAndView and return
+	 * @return ModelAndView with "profile" page
+	 */
 	@RequestMapping("/profile")
 	public ModelAndView profileHandler() {
 		ModelAndView mav = new ModelAndView("profile");
@@ -55,6 +64,10 @@ public class MainController {
 		return mav;
 	}
 
+	/**
+	 * create Bean with all games in database, add it to ModelAndView and return
+	 * @return ModelAndView with "addGame" page
+	 */
 	@RequestMapping("/addGame")
 	public ModelAndView addGameHandler() {
 		ModelAndView mav = new ModelAndView("addGame");
@@ -63,6 +76,10 @@ public class MainController {
 		return mav;
 	}
 
+	/**
+	 * Create bean with all games in the currently playing list for current user, add it to ModelAndView and return
+	 * @return ModelAndView with "playGame" page
+	 */
 	@RequestMapping("/playGame")
 	public ModelAndView playGameHandler() {
 		ModelAndView mav = new ModelAndView("playGame");
@@ -73,6 +90,10 @@ public class MainController {
 		return mav;
 	}
 
+	/**
+	 * Create bean with all UserGames for current user, add it to ModelAndView and return
+	 * @return ModelAndView with "editGame" page
+	 */
 	@RequestMapping("/editGame")
 	public ModelAndView editGameHandler() {
 		ModelAndView mav = new ModelAndView("editGame");
@@ -81,6 +102,10 @@ public class MainController {
 		return mav;
 	}
 
+	/**
+	 * Create bean with all UserGame for current user, add it to ModelAndView and return
+	 * @return ModelAndView with "compare" page
+	 */
 	@RequestMapping("/compare")
 	public ModelAndView compareHandler() {
 		ModelAndView mav = new ModelAndView("compare");
@@ -89,6 +114,10 @@ public class MainController {
 		return mav;
 	}
 
+	/**
+	 * Create bean with all UserGames for current user, add it to ModelAndView and return
+	 * @return ModelAndView with "deleteGame" page
+	 */
 	@RequestMapping("/deleteGame")
 	public ModelAndView deleteHandler() {
 		ModelAndView mav = new ModelAndView("deleteGame");
@@ -97,6 +126,12 @@ public class MainController {
 		return mav;
 	}
 
+	/**
+	 * When user clicks add game button, call the correct service method and redirect back to addGame page
+	 * @param ug ModelAttribute coming in from JSP
+	 * @param request use to get access to session attributes
+	 * @return redirect to addGame
+	 */
 	@RequestMapping("/addNewGame")
 	public String newGameHandler(@ModelAttribute UserGame ug, HttpServletRequest request) {
 		if (!userName.equals("")) {
@@ -106,6 +141,11 @@ public class MainController {
 		return "redirect:/addGame";
 	}
 
+	/**
+	 * When user clicks the update game button, call the correct service method and return a redirect to editGame
+	 * @param ug ModelAttribute coming in from the JSP
+	 * @return redirect to editGame
+	 */
 	@RequestMapping("/editGameDetails")
 	public String editGameDetailsHandler(@ModelAttribute UserGame ug) {
 		if (!userName.equals("") && !ug.getGameName().equals("")) {
@@ -127,6 +167,12 @@ public class MainController {
 		return "redirect:/editGame";
 	}
 
+	/**
+	 * When click the compare by hours button, call the correct service method to get the correct list
+	 * Add that list to the ModelAndView returned by compareHandler() and return it
+	 * @param ug ModelAttribute coming in from the JSP
+	 * @return ModelAndView that comes from compareHandler()
+	 */
 	@RequestMapping(value = "/compareWithUsers", params = "hoursSort")
 	public ModelAndView compareWithUsersHours(@ModelAttribute UserGame ug) {
 		ModelAndView mav = compareHandler();
@@ -138,6 +184,12 @@ public class MainController {
 		return mav;
 	}
 
+	/**
+	 * When click the compare by times completed button, call the correct service method to get the correct list
+	 * Add that list to the ModelAndView returned by compareHandler() and return it
+	 * @param ug ModelAttribute coming in from the JSP
+	 * @return ModelAndView that comes from compareHandler()
+	 */
 	@RequestMapping(value = "/compareWithUsers", params = "completedSort")
 	public ModelAndView compareWithUsersCompletions(@ModelAttribute UserGame ug) {
 		ModelAndView mav = compareHandler();
@@ -149,6 +201,11 @@ public class MainController {
 		return mav;
 	}
 	
+	/**
+	 * When users are sorting their own profile and sort by hours, call the correct sevice method to get the correct list
+	 * Add that list to the ModelAndView returned by profileHandler() and return it
+	 * @return The ModelAndView that comes from the profileHandler()
+	 */
 	@RequestMapping(value = "/sortProfile", params = "hoursSort")
 	public ModelAndView sortProfileHoursHandler() {
 		ModelAndView mav = profileHandler();
@@ -159,6 +216,11 @@ public class MainController {
 		return mav;
 	}
 	
+	/**
+	 * When users are sorting their own profile and sort by times completed, call the correct sevice method to get the correct list
+	 * Add that list to the ModelAndView returned by profileHandler() and return it
+	 * @return The ModelAndView that comes from the profileHandler()
+	 */
 	@RequestMapping(value = "/sortProfile", params = "completedSort")
 	public ModelAndView sortProfileCompletionsHandler() {
 		ModelAndView mav = profileHandler();
@@ -169,6 +231,11 @@ public class MainController {
 		return mav;
 	}
 	
+	/**
+	 * When users are sorting their own profile and sort by list, call the correct sevice method to get the correct list
+	 * Add that list to the ModelAndView returned by profileHandler() and return it
+	 * @return The ModelAndView that comes from the profileHandler()
+	 */
 	@RequestMapping(value = "/sortProfile", params = "listSort")
 	public ModelAndView sortProfileListHandler() {
 		ModelAndView mav = profileHandler();
@@ -179,6 +246,12 @@ public class MainController {
 		return mav;
 	}
 
+	/**
+	 * When the user clicks the update button on the play game page to add hours to a game. Take the number coming from the JSP round it
+	 * and send it to the correct method.
+	 * @param ugh ModelAttribute coming from the JSP
+	 * @return redirect to playGame page
+	 */
 	@RequestMapping("/updateGameHours")
 	public String updateGameHoursHandler(@ModelAttribute UserGameHours ugh) {
 		if (!userName.equals("") && ugh.getGameName() != null) {
@@ -191,6 +264,12 @@ public class MainController {
 		return "redirect:/playGame";
 	}
 
+	/**
+	 * When a user is attempting to register for an account, call the correct service method, and set error message depending on response
+	 * @param user ModelAttribute coming in from the JSP
+	 * @param request to have access to the session attributes
+	 * @return redirect to login if valid, error otherwise
+	 */
 	@RequestMapping("/registerNewUser")
 	public String registerNewUserHandler(@ModelAttribute User user, HttpServletRequest request) {
 		if (us.registerUser(user.getUserName(), user.getPassword(), user.getPasswordVerification())) {
@@ -205,6 +284,12 @@ public class MainController {
 		}
 	}
 
+	/**
+	 * When a user is attempting to login, call the correct service method, and return a redirect to profile or error
+	 * @param user ModelAttribute coming in from JSP
+	 * @param request to have access to session attributes
+	 * @return redirect to profile if valid, error otherwise
+	 */
 	@RequestMapping("/loginAttempt")
 	public String loginAttemptHandler(@ModelAttribute User user, HttpServletRequest request) {
 		if (us.validateUser(user.getUserName(), user.getPassword())) {
@@ -221,6 +306,11 @@ public class MainController {
 		return "error";
 	}
 
+	/**
+	 * When a user is trying to remove a game from their profile, call the correct service method and redirect
+	 * @param ug ModelAttribute coming in from the JSP
+	 * @return redirect to deleteGame
+	 */
 	@RequestMapping("/removeGame")
 	public String removeGameHandler(@ModelAttribute UserGame ug) {
 		if (!ug.getGameName().equals("")) {
@@ -229,6 +319,11 @@ public class MainController {
 		return "redirect:/deleteGame";
 	}
 
+	/**
+	 * When a user logs out, clear the reference to the username in controller class, and set session attribute to null
+	 * @param request to have access to session attributes
+	 * @return redirect to login
+	 */
 	@RequestMapping("/logout")
 	public String logoutHandler(HttpServletRequest request) {
 		request.getSession().setAttribute("userName", null);

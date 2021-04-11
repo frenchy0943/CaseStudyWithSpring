@@ -1,5 +1,10 @@
 package com.VideoGameTracker.entities;
 
+/**
+ * Game Hours used to update the hours of a UserGame entity
+ * @author Brandon French
+ *
+ */
 public class UserGameHours {
 	
 	private String userName;

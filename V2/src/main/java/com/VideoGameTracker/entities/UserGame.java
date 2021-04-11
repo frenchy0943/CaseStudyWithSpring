@@ -7,6 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+/**
+ * User Game Entity, to link Users and games together
+ * @author Brandon French
+ *
+ */
 @Entity
 @IdClass(value=UserGameId.class)
 @Table(name = "linkedGames")

@@ -3,6 +3,11 @@ package com.VideoGameTracker.entities;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * Game Entity
+ * @author Brandon French
+ *
+ */
 @Entity
 public class Game {
 	
