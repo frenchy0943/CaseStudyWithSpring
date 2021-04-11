@@ -30,7 +30,7 @@
         <div style="color: white">
             Don't have an account? Click <a href="register">here</a> to register!
         </div>
-        <img src="/VideoGameTracker/resources/images/singleController.jpg" alt="" style="width: 100%">
+        <img src="/resources/images/singleController.jpg" alt="" style="width: 100%">
     </div>
 </body>
 </html>

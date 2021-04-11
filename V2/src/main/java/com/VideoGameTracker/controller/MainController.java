@@ -148,6 +148,36 @@ public class MainController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value = "/sortProfile", params = "hoursSort")
+	public ModelAndView sortProfileHoursHandler() {
+		ModelAndView mav = profileHandler();
+		if(!userName.equals("")) {
+			List<UserGame> userGames = ugs.getAllByIdHoursSort(userName);
+			mav.addObject("profileListBean", userGames);
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "/sortProfile", params = "completedSort")
+	public ModelAndView sortProfileCompletionsHandler() {
+		ModelAndView mav = profileHandler();
+		if(!userName.equals("")) {
+			List<UserGame> userGames = ugs.getAllByIdCompletionsSort(userName);
+			mav.addObject("profileListBean", userGames);
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "/sortProfile", params = "listSort")
+	public ModelAndView sortProfileListHandler() {
+		ModelAndView mav = profileHandler();
+		if(!userName.equals("")) {
+			List<UserGame> userGames = ugs.getAllByIdListSort(userName);
+			mav.addObject("profileListBean", userGames);
+		}
+		return mav;
+	}
 
 	@RequestMapping("/updateGameHours")
 	public String updateGameHoursHandler(@ModelAttribute UserGameHours ugh) {

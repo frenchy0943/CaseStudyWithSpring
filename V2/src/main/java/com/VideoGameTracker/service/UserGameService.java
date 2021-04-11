@@ -75,6 +75,18 @@ public class UserGameService {
 	public List<UserGame> getAllByGameNameSortByCompletions(String gameName){
 		return ugr.findAllByGameNameOrderByTimesCompletedDescGameHoursDesc(gameName);
 	}
+	
+	public List<UserGame> getAllByIdHoursSort(String userName){
+		return ugr.findAllByUserNameOrderByGameHoursDesc(userName);
+	}
+	
+	public List<UserGame> getAllByIdCompletionsSort(String userName){
+		return ugr.findAllByUserNameOrderByTimesCompletedDesc(userName);
+	}
+	
+	public List<UserGame> getAllByIdListSort(String userName){
+		return ugr.findAllByUserNameOrderByCurrentList(userName);
+	}
 
 	public void updateGameHours(String userName, String gameName, double hours) {
 		UserGame ug = getUserGame(userName, gameName);

@@ -43,6 +43,8 @@ class UserGameTest {
 	
 	UserGame testUG3;
 	
+	UserGame testUG4;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
@@ -55,11 +57,15 @@ class UserGameTest {
 	void setUp() throws Exception {
 		us.addUser(new User("testUser", "Testpass", "Testpass"));
 		us.addUser(new User("testUser2", "Testpass", "Testpass"));
+		
 		gs.addGame(new Game("testGame"));
-		testUG = new UserGame("testUser", "testGame", 0.0, 0, "current");
 		gs.addGame(new Game("testGame2"));
+		gs.addGame(new Game("testGame3"));
+		
+		testUG = new UserGame("testUser", "testGame", 0.0, 0, "backlog");
 		testUG2 = new UserGame("testUser", "testGame2", 0.0, 2, "current");
 		testUG3 = new UserGame("testUser2", "testGame2", 15.0, 0, "current");
+		testUG4 = new UserGame("testUser", "testGame3", 30.0, 1, "completed");
 	}
 
 	@AfterEach
@@ -70,7 +76,7 @@ class UserGameTest {
 	@Test
 	@Transactional
 	void testLinkUserGame() {
-		assertEquals(1, ugs.linkUserAndGame("testUser", "testGame", 0, 0, "current"));
+		assertEquals(1, ugs.linkUserAndGame("testUser", "testGame", 0, 0, "backlog"));
 	}
 	
 	@Test
@@ -84,10 +90,10 @@ class UserGameTest {
 	@Transactional
 	void testUpdate() {
 		ugr.save(testUG);
-		testUG.setCurrentList("backlog");
+		testUG.setCurrentList("completed");
 		testUG.setGameHours(10.0);
 		testUG.setTimesCompleted(1);
-		assertEquals(testUG, ugs.updateUserGame("testUser", "testGame", 10.0, 1, "backlog"));
+		assertEquals(testUG, ugs.updateUserGame("testUser", "testGame", 10.0, 1, "completed"));
 	}
 	
 	@Test
@@ -128,6 +134,45 @@ class UserGameTest {
 		expected.add(testUG2);
 		expected.add(testUG3);
 		assertEquals(expected, ugs.getAllByGameNameSortByCompletions("testGame2"));
+	}
+	
+	@Test
+	@Transactional
+	void testSortUserNameByHours() {
+		ugr.save(testUG);
+		ugr.save(testUG2);
+		ugr.save(testUG4);
+		List<UserGame> expected = new ArrayList<>();
+		expected.add(testUG4);
+		expected.add(testUG);
+		expected.add(testUG2);
+		assertEquals(expected, ugs.getAllByIdHoursSort("testUser"));
+	}
+	
+	@Test
+	@Transactional
+	void testSortUserNameByCompletions() {
+		ugr.save(testUG);
+		ugr.save(testUG2);
+		ugr.save(testUG4);
+		List<UserGame> expected = new ArrayList<>();
+		expected.add(testUG2);
+		expected.add(testUG4);
+		expected.add(testUG);
+		assertEquals(expected, ugs.getAllByIdCompletionsSort("testUser"));
+	}
+	
+	@Test
+	@Transactional
+	void testSortUserNameByList() {
+		ugr.save(testUG);
+		ugr.save(testUG2);
+		ugr.save(testUG4);
+		List<UserGame> expected = new ArrayList<>();
+		expected.add(testUG);
+		expected.add(testUG4);
+		expected.add(testUG2);
+		assertEquals(expected, ugs.getAllByIdListSort("testUser"));
 	}
 
 }

@@ -40,6 +40,11 @@
                 <a href = "logout">Logout</a>|
             </nav>
         </div>
+        <form action="sortProfile">
+        	<button type="submit" name = "hoursSort" value = "hoursSort">Sort By Hours</button>
+            <button type="submit" name = "completedSort" value = "completedSort">Sort By completions</button>
+            <button type="submit" name = "listSort" value = "listSort">Sort by List</button>
+        </form>
         <table>
             <thead>
                 <tr>

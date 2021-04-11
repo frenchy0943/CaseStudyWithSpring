@@ -18,5 +18,11 @@ public interface UserGameRepository extends JpaRepository<UserGame, String>{
 	
 	List<UserGame> findAllByGameNameOrderByTimesCompletedDescGameHoursDesc(String gameName);
 	
+	List<UserGame> findAllByUserNameOrderByGameHoursDesc(String userName);
+	
+	List<UserGame> findAllByUserNameOrderByTimesCompletedDesc(String userName);
+	
+	List<UserGame> findAllByUserNameOrderByCurrentList(String userName);
+	
 	boolean existsByUserNameAndGameName(String userName, String gameName);
 }
