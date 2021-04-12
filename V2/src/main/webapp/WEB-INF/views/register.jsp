@@ -30,7 +30,7 @@
         <div style="color: white">
            Already have an account? Click <a href="login">here</a> to login!
         </div>
-        <img src="/VideoGameTracker/resources/images/controllers.jpg" alt="" style="width: 100%">
+        <img src="<%=request.getContextPath() %>/resources/images/controllers.jpg" alt="" style="width: 100%">
     </div>
 </body>
 </html>

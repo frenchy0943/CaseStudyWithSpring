@@ -17,6 +17,7 @@
 
 
 </head>
+
 <body style = "background-color: #1f2833;">
     <div class = "container" style="background-color: #0b0c10; ">
         <div class = "jumbotron text-center" style ="background-color:#66fcf1">
@@ -30,7 +31,7 @@
         <div style="color: white">
             Don't have an account? Click <a href="register">here</a> to register!
         </div>
-        <img src="/resources/images/singleController.jpg" alt="" style="width: 100%">
+        <img src="<%=request.getContextPath() %>/resources/images/singleController.jpg" alt="" style="width: 100%">
     </div>
 </body>
 </html>
