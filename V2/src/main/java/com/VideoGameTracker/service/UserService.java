@@ -18,10 +18,7 @@ import com.VideoGameTracker.repo.UserRepository;
 public class UserService {
 
 	@Autowired
-	UserRepository ur;
-	
-	@Autowired
-	UserGameService ugs;
+	private UserRepository ur;
 	
 	/**
 	 * Save a user to the database
@@ -112,15 +109,12 @@ public class UserService {
 		User user = getById(userName);
 		int removed = 0;
 		if (listToRemove.equals("current")) {
-			System.out.println("Current List Before: " + user.getCurrentGames());
 			user.getCurrentGames().remove(game);
 			removed = 1;
 		} else if (listToRemove.equals("backlog")) {
-			System.out.println("Backlog List Before: " + user.getBackLogGames());
 			user.getBackLogGames().remove(game);
 			removed = 1;
 		} else if (listToRemove.equals("completed")) {
-			System.out.println("Completed List Before: " + user.getCompletedGames());
 			user.getCompletedGames().remove(game);
 			removed = 1;
 		}

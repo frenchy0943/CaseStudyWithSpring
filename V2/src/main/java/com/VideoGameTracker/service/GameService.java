@@ -17,7 +17,7 @@ import com.VideoGameTracker.repo.GameRepository;
 public class GameService {
 
 	@Autowired
-	GameRepository gr;
+	private GameRepository gr;
 	/**
 	 * Save a game to the database
 	 * @param game Game to be added to the database

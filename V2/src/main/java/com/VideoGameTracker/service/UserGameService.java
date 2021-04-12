@@ -19,13 +19,13 @@ import com.VideoGameTracker.repo.UserGameRepository;
 public class UserGameService {
 
 	@Autowired
-	UserGameRepository ugr;
+	private UserGameRepository ugr;
 
 	@Autowired
-	GameService gs;
+	private GameService gs;
 
 	@Autowired
-	UserService us;
+	private UserService us;
 
 	/**
 	 * Get a UserGame out of the database
