@@ -29,13 +29,13 @@ public class MainController {
 	private String userName = "";
 
 	@Autowired
-	UserService us;
+	private UserService us;
 
 	@Autowired
-	GameService gs;
+	private GameService gs;
 
 	@Autowired
-	UserGameService ugs;
+	private UserGameService ugs;
 
 	@RequestMapping("/")
 	public String indexHandler() {
